@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2020 by Bryan Siepert, written for Adafruit Industries
-#
-# SPDX-License-Identifier: Unlicense
 import time
 import board
 import busio
@@ -14,7 +11,7 @@ scd = adafruit_scd30.SCD30(i2c)
 # scd.temperature_offset = 10
 print("Temperature offset:", scd.temperature_offset)
 
-scd.measurement_interval = 2
+scd.measurement_interval = 15
 print("Measurement interval:", scd.measurement_interval)
 
 # scd.self_calibration_enabled = True
@@ -39,6 +36,7 @@ humidity_metric = prometheus_client.Gauge('hum_rel', 'Humidity measurement, in %
 
 while True:
     data = scd.data_available
+    print("Checking for data...")
     if data:
         print("Data Available!")
         co2 = scd.CO2
@@ -51,4 +49,4 @@ while True:
         humidity = scd.relative_humidity
         humidity_metric.labels("humidity_rel").set(humidity)
 
-    time.sleep(0.5)
+    time.sleep(10)
