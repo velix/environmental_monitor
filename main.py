@@ -1,3 +1,5 @@
+# Based on https://leanpub.com/rpcmonitor/read#leanpub-auto-gauge
+
 import time
 import board
 import busio
@@ -11,7 +13,7 @@ scd = adafruit_scd30.SCD30(i2c)
 # scd.temperature_offset = 10
 print("Temperature offset:", scd.temperature_offset)
 
-scd.measurement_interval = 15
+scd.measurement_interval = 30
 print("Measurement interval:", scd.measurement_interval)
 
 # scd.self_calibration_enabled = True
